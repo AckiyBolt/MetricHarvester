@@ -1,10 +1,6 @@
-package harvester.master;
+package harvester.slave;
 
-/**
- * Hello world!
- *
- */
-public class App 
+public class SlaveMain 
 {
     public static void main( String[] args )
     {
