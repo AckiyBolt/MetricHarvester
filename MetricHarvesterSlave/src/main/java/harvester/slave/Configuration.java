@@ -20,5 +20,7 @@ public class Configuration {
         FILLERS_MAP.put( 11, new CPUGateway() );
     }
     
+    public static String RABBIT_MQ_HOST = "rabbitmq";
+    
     public static final String SIGAR_EXCEPTION_VALUE = "SigarException have a place";
 }

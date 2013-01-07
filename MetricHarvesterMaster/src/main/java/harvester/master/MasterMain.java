@@ -26,7 +26,7 @@ public class MasterMain {
 
     private static Runnable createSendingThread () {
         return new Runnable() {
-            private int counter = 5;
+            private int counter = 20;
 
             public void run () {
 
@@ -65,7 +65,7 @@ public class MasterMain {
 
                 channel.queueDeclare( QUEUE_NAME, false, false, false, null );
                 channel.basicPublish( "", QUEUE_NAME, null, message.getBytes() );
-                System.out.println( " [x] Sent '" + message + "'" );
+                System.out.println( " [x][Master] Sent '" + message + "'" );
 
                 channel.close();
                 connection.close();
@@ -75,17 +75,17 @@ public class MasterMain {
 
     private static Runnable createListeningThread () {
         return new Runnable() {
-            private final static String QUEUE_NAME = "cpu_request";
+            private final static String QUEUE_NAME = "cpu_ansver";
 
             public void run () {
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
                     factory.setHost( Configuration.RABBIT_MQ_HOST );
+                    
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
                     channel.queueDeclare( QUEUE_NAME, false, false, false, null );
-                    System.out.println( " [*] Waiting for messages. To exit press CTRL+C" );
 
                     QueueingConsumer consumer = new QueueingConsumer( channel );
                     channel.basicConsume( QUEUE_NAME, true, consumer );
@@ -93,7 +93,7 @@ public class MasterMain {
                     while ( true ) {
                         QueueingConsumer.Delivery delivery = consumer.nextDelivery();
                         String message = new String( delivery.getBody() );
-                        System.out.println( " [x] Received '" + message + "'" );
+                        System.out.println( " [x][Master] Received '" + message + "'" );
                     }
                 } catch ( Exception ex ) {
                     System.out.println( ex );

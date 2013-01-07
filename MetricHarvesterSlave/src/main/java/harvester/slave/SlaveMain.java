@@ -15,11 +15,13 @@ public class SlaveMain {
     public static void main ( String[] args )
             throws SigarException {
 
-        Metric metric = new MetricImpl();
-        metric.setId( 10 );
-
-        metricProvider.fillMetric( metric );
-
-        System.out.println( metric.getValue() );
+        ConversationProvider prov = new ConversationProvider();
+        Metric metric = null;
+        
+        while (0 == 0) {
+            metric = prov.reciveMetric();
+            metricProvider.fillMetric( metric );
+            prov.sendMetric( metric );
+        }
     }
 }
