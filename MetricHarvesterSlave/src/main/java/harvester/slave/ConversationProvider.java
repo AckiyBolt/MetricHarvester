@@ -1,10 +1,6 @@
-/***********************************************************************
- * Module:  ConversationProvider.java
- * Author:  T@urus
- * Purpose: Defines the Class ConversationProvider
- ***********************************************************************/
+package harvester.slave;
 
-import java.util.*;
+import harvester.slave.metricprov.Metric;
 
 public class ConversationProvider {
    /** @param ip */
