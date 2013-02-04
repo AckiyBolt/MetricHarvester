@@ -1,6 +1,7 @@
 MetricHarvester
 ===============
 This is "Multi-agent system". It will be my diploma. Eah... "Multi-agent system"... *trollface*
+
 Destination of this monster - scheduled harvesting hardware metrics (CPU, RAM, etc.) on VPS.
 In reality it's a little system that consists of few modules.
 
