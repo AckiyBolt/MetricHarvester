@@ -1,27 +1,31 @@
 package harvester.slave;
 
-import harvester.slave.metricprov.Metric;
-import harvester.slave.metricprov.MetricImpl;
-import harvester.slave.metricprov.MetricProvider;
-import org.hyperic.sigar.Cpu;
-import org.hyperic.sigar.CpuPerc;
-import org.hyperic.sigar.Sigar;
+import harvester.core.conversation.Conversation;
+import harvester.core.conversation.ConversationProvider;
+import harvester.core.message.Message;
+import java.util.Calendar;
 import org.hyperic.sigar.SigarException;
 
 public class SlaveMain {
 
-    private static MetricProvider metricProvider = new MetricProvider();
+//    private static MetricProvider metricProvider = new MetricProvider();
 
     public static void main ( String[] args )
             throws SigarException {
 
-        ConversationProvider prov = new ConversationProvider();
-        Metric metric = null;
+        Conversation conversation = ConversationProvider.createSimpleConversation();
+        
+        Message message = null;
         
         while (0 == 0) {
-            metric = prov.reciveMetric();
-            metricProvider.fillMetric( metric );
-            prov.sendMetric( metric );
+            message = conversation.reciveMessage( "requestQueue" );
+            message.setReciveRequrst( Calendar.getInstance().getTime() );
+            
+            
+            
+            
+            message.setSendRespose( Calendar.getInstance().getTime() );
+            conversation.sendMessage( message, "responseQueue   " );
         }
     }
 }

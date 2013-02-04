@@ -5,7 +5,7 @@ import org.hyperic.sigar.CpuPerc;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
-public class CPUGateway
+public class CPUPercentGateway
         extends AbstractSigarGateway {
 
     @Override
