@@ -10,8 +10,8 @@ public class SynchronizedMessageBuffer
         extends MessageBuffer {
 
     @Override
-    public synchronized Collection<Message> getMessages () {
-        return super.getMessages();
+    public synchronized Collection<Message> pushMessages () {
+        return super.pushMessages();
     }
 
     @Override
@@ -22,6 +22,11 @@ public class SynchronizedMessageBuffer
     @Override
     public synchronized void putAll ( Collection<Message> collection ) {
         super.putAll( collection );
+    }
+
+    @Override
+    public synchronized void putPackage ( MessagePackage pack ) {
+        super.putPackage( pack );
     }
 
     @Override

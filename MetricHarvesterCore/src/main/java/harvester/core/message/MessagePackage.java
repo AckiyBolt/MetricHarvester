@@ -35,23 +35,35 @@ public class MessagePackage
     }
 
     public void makeSendRequestDates () {
+        
+        Date curDate = getCurrentDate();
+        
         for ( Message message : getMessages() )
-            message.setSendRequest( getCurrentDate() );
+            message.setSendRequest( curDate );
     }
     
     public void makeReciveRequestDates () {
+        
+        Date curDate = getCurrentDate();
+        
         for ( Message message : getMessages() )
-            message.setReciveRequest( getCurrentDate() );
+            message.setReciveRequest( curDate );
     }
 
     public void makeSendResponseDates () {
+        
+        Date curDate = getCurrentDate();
+        
         for ( Message message : getMessages() )
-            message.setSendResponse( getCurrentDate() );
+            message.setSendResponse( curDate );
     }
     
     public void makeReciveResponseDates () {
+        
+        Date curDate = getCurrentDate();
+        
         for ( Message message : getMessages() )
-            message.setReciveResponse( getCurrentDate() );
+            message.setReciveResponse( curDate );
     }
 
     private Date getCurrentDate () {

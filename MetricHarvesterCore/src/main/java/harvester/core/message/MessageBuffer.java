@@ -13,7 +13,7 @@ public class MessageBuffer {
 
     private Map<String, Message> messages;
 
-    public Collection<Message> getMessages () {
+    protected Collection<Message> getMessages () {
 
         Collection<Message> result = null;
 
@@ -45,6 +45,11 @@ public class MessageBuffer {
                 put( message );
     }
 
+    public void putPackage ( MessagePackage pack ) {
+        if ( pack != null )
+            putAll( pack.getMessages() );
+    }
+
     public Message push ( String command ) {
 
         Message result = null;
@@ -52,6 +57,21 @@ public class MessageBuffer {
         if ( messages != null && !messages.isEmpty() )
             result = messages.remove( command );
 
+        return result;
+    }
+
+    public Collection<Message> pushMessages () {
+
+        Collection<Message> result = null;
+
+        if ( messages != null ) {
+            result = messages.values();
+            messages.clear();
+        }
+        else
+            result = Collections.EMPTY_LIST;
+
+        
         return result;
     }
 }

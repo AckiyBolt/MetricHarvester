@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package harvester.core.message;
 
 import java.util.Calendar;
@@ -14,7 +10,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Kostiantyn_Belentso
+ * @author T@urus
  */
 public class MessageBufferTest {
     
@@ -52,6 +48,50 @@ public class MessageBufferTest {
         
         Collection<Message> messages = buffer.getMessages();
         assertTrue( messages.isEmpty() );
+    }
+    
+    @Test
+    public void testPushMessages_PushMessagesFromEmptyBuffer_ResultIsNotNull () {
+        
+        Collection<Message> messages = buffer.pushMessages();
+        assertNotNull( messages );
+    }
+    
+    @Test
+    public void testPushMessages_PushMessagesFromEmptyBuffer_ResultIsEmptyCollection () {
+        
+        Collection<Message> messages = buffer.pushMessages();
+        assertTrue( messages.isEmpty() );
+    }
+    
+    @Test
+    public void testPushMessages_PushMessagesFromFilledBuffer_ClearBufferAfterAction () {
+        
+        buffer.put( msg1 );
+        buffer.put( msg2 );
+        buffer.put( msg3 );
+        
+        buffer.pushMessages();
+        
+        int expected = 0;
+        int actual = buffer.getMessages().size();
+        
+        assertEquals( expected, actual );
+    }
+    
+    @Test
+    public void testPushMessages_PushMessagesFromFilledBuffer_ExpectedValuesCount () {
+        
+        buffer.put( msg1 );
+        buffer.put( msg2 );
+        buffer.put( msg3 );
+        
+        Collection<Message> messages = buffer.pushMessages();
+        
+        int expected = 0;
+        int actual = messages.size();
+        
+        assertEquals( expected, actual );
     }
     
     @Test
@@ -148,6 +188,17 @@ public class MessageBufferTest {
         assertEquals( expected, actual );
     }
 
+    @Test
+    public void testPutPackage_Null_NothingWasChanged () {
+        
+        buffer.putPackage( null );
+        
+        int expected = 0;
+        int actual = buffer.getMessages().size();
+        
+        assertEquals( expected, actual );
+    }
+    
     @Test
     public void testPush_FromEmptyBuffer_Null () {
         

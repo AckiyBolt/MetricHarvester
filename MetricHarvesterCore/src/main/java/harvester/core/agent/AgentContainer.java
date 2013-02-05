@@ -7,7 +7,7 @@ import java.util.LinkedList;
  *
  * @author T@urus
  */
-public abstract class AgentContainer {
+public class AgentContainer {
 
     private Collection<Agent> agents;
 
