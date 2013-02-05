@@ -15,9 +15,8 @@ public class FQDNAgent
     @Override
     protected void loadValue ( Message message )
             throws SigarException {
-        
+
         String result = sigar.getFQDN();
         message.setResult( result );
     }
-
 }

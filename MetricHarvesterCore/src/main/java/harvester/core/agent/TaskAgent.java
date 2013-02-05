@@ -1,17 +1,19 @@
 package harvester.core.agent;
 
-import java.util.concurrent.RecursiveTask;
+import static harvester.core.agent.AgentState.*;
+import harvester.core.message.Message;
+import harvester.core.message.SynchronizedMessageBuffer;
 
 /**
  *
- * @author T@urus
+ * @author Kostiantyn_Belentso
  */
-public abstract class TaskAgent<T>
-        extends RecursiveTask<T> {
+public abstract class TaskAgent <M, T>
+        extends ActionAgent {
 
-    protected final String NAME;
-
-    public TaskAgent ( String name ) {
-        this.NAME = name;
+    public TaskAgent (String name, M monitor ) {
+        super( name, monitor );
     }
+    
+    public abstract void makeJob (T task);
 }

@@ -1,6 +1,7 @@
 package harvester.slave.agent;
 
-import harvester.core.agent.Agent;
+import static harvester.core.agent.AgentState.*;
+import harvester.core.agent.MessageTaskAgent;
 import harvester.core.message.Message;
 import harvester.core.message.SynchronizedMessageBuffer;
 import java.util.logging.Level;
@@ -9,39 +10,25 @@ import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
 public abstract class SigarAgent
-        extends Agent {
+        extends MessageTaskAgent {
 
     protected Sigar sigar = new Sigar();
-    protected SynchronizedMessageBuffer messageBuffer;
 
     public SigarAgent ( String name, SynchronizedMessageBuffer messageBuffer ) {
-        super( name );
-        this.messageBuffer = messageBuffer;
+        super( name, messageBuffer );
     }
 
     @Override
-    public void run () {
+    public void makeJob ( Message message ) {
 
-        while ( true ) {
+        try {
+            loadValue( message );
 
-            Message message = messageBuffer.push( this.getName() );
-            
-            try {
-                loadValue( message );
-                
-            } catch ( SigarException ex ) {
-                Logger.getLogger( SigarAgent.class.getName() ).log( Level.SEVERE, null, ex );
-                break;
-            }
-            
-            messageBuffer.put( message );
-
-            try {
-                messageBuffer.wait();
-            } catch ( InterruptedException ex ) {
-                break;
-            }
+        } catch ( SigarException ex ) {
+            Logger.getLogger( SigarAgent.class.getName() ).log( Level.SEVERE, null, ex );
+            state = DEAD;
         }
+
     }
 
     protected abstract void loadValue ( Message message )

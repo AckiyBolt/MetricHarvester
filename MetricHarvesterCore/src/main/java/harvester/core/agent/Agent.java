@@ -1,15 +1,24 @@
 package harvester.core.agent;
 
+import static harvester.core.agent.AgentState.*;
+import harvester.core.message.Message;
+import harvester.core.message.SynchronizedMessageBuffer;
+
 /**
  *
- * @author Kostiantyn_Belentso
+ * @author T@urus
  */
 public abstract class Agent
         extends Thread {
 
-    public Agent (String name) {
+    protected AgentState state;
+
+    public Agent ( String name ) {
+
         super( name );
+
         this.setDaemon( true );
+        state = IDLE;
     }
 
     @Override

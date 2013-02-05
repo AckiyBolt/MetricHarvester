@@ -3,8 +3,6 @@ package harvester.slave.agent.metric;
 import harvester.core.message.Message;
 import harvester.core.message.SynchronizedMessageBuffer;
 import harvester.slave.agent.SigarAgent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.hyperic.sigar.CpuPerc;
 import org.hyperic.sigar.SigarException;
 
