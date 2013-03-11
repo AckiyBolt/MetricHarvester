@@ -4,8 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{209412CA-5FF0-4C39-B022-F7D25CDC2F62}" Loaded="No" Name="Diploma" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="Diploma/Diploma.prj"/>
-		<Model Expanded="Yes" ID="{3CDAA75C-5DBE-4AE7-9848-18C681CC2B93}" Name="Conceptual Data_1" Selected="Yes" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="file:///C|/Users/T@urus/Desktop/Conceptual Data_1.cdm"/>
+		<Model Expanded="Yes" ID="{209412CA-5FF0-4C39-B022-F7D25CDC2F62}" Name="Diploma" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="Diploma/Diploma.prj"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
