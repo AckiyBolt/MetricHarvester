@@ -1,3 +1,6 @@
 /MetricHarvesterMaster/target/
 /MetricHarvesterSlave/target/
 /MetricHarvesterCore/target/
+/MetricHarvesterGUI/nbproject/private/
+/MetricHarvesterGUI/build/
+/MetricHarvesterGUI/dist/
