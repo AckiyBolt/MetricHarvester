@@ -7,23 +7,27 @@ import harvester.core.message.SynchronizedMessageBuffer;
  *
  * @author Kostiantyn_Belentso
  */
-public abstract class MessageTaskAgent extends TaskAgent<SynchronizedMessageBuffer, Message> {
+public abstract class MessageTaskAgent
+        extends TaskAgent<SynchronizedMessageBuffer, Message> {
 
-    private SynchronizedMessageBuffer buffer;
-    
+    private final SynchronizedMessageBuffer buffer;
+
     public MessageTaskAgent ( String name, SynchronizedMessageBuffer monitor ) {
         super( name, monitor );
         this.buffer = monitor;
     }
 
     @Override
-    public abstract void makeJob ( Message message );
+    protected abstract void makeJob ( Message message );
 
     @Override
-    public void makeJob () {
+    protected void makeJob () {
         Message message = buffer.push( this.getName() );
-        makeJob( message );
-        buffer.put( message );
-    }
+        
+        if ( message == null )
+            return;
 
+        makeJob( message );
+        buffer.putOutput( message );
+    }
 }

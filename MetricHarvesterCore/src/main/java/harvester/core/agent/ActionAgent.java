@@ -3,6 +3,8 @@ package harvester.core.agent;
 import static harvester.core.agent.AgentState.*;
 import harvester.core.message.Message;
 import harvester.core.message.SynchronizedMessageBuffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -10,10 +12,10 @@ import harvester.core.message.SynchronizedMessageBuffer;
  */
 public abstract class ActionAgent
         extends Agent {
-    
-    protected Object monitor;
-    
-    public ActionAgent (String name, Object monitor ) {
+
+    protected final Object monitor;
+
+    public ActionAgent ( String name, Object monitor ) {
         super( name );
         this.monitor = monitor;
     }
@@ -21,29 +23,28 @@ public abstract class ActionAgent
     @Override
     public void run () {
         while ( state != DEAD ) {
-            
-                makeJob();
+            chackState();
+            makeJob();
 
-            changeState();
+            if ( stateIsChangable() )
+                state = IDLE;
         }
     }
-    
-    public abstract void makeJob ();
 
-    private void changeState () {
-        
+    protected abstract boolean stateIsChangable ();
+
+    protected abstract void makeJob ();
+
+    private void chackState () {
         try {
-
-            if ( state == ACTIVE ) {
-                state = IDLE;
-                monitor.wait();
-            }
-
+            if ( state == IDLE )
+                synchronized ( monitor ) {
+                    monitor.wait();
+                }
             state = ACTIVE;
 
         } catch ( InterruptedException ex ) {
             state = DEAD;
         }
     }
-
 }

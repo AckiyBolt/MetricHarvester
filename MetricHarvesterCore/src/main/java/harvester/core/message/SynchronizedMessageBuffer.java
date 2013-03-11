@@ -15,22 +15,20 @@ public class SynchronizedMessageBuffer
     }
 
     @Override
-    public synchronized void put ( Message message ) {
-        super.put( message );
+    public synchronized void putInput ( Message message ) {
+        super.putInput( message );
+        this.notifyAll();
     }
 
     @Override
-    public synchronized void putAll ( Collection<Message> collection ) {
-        super.putAll( collection );
-    }
-
-    @Override
-    public synchronized void putPackage ( MessagePackage pack ) {
-        super.putPackage( pack );
+    public synchronized void putOutput ( Message message ) {
+        super.putOutput( message );
+        this.notifyAll();
     }
 
     @Override
     public synchronized Message push ( String command ) {
-        return super.push( command );
+        Message message = super.push( command );
+        return message;
     }
 }

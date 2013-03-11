@@ -19,8 +19,7 @@ public abstract class SigarAgent
     }
 
     @Override
-    public void makeJob ( Message message ) {
-
+    protected void makeJob ( Message message ) {
         try {
             loadValue( message );
 
@@ -28,9 +27,13 @@ public abstract class SigarAgent
             Logger.getLogger( SigarAgent.class.getName() ).log( Level.SEVERE, null, ex );
             state = DEAD;
         }
-
     }
 
     protected abstract void loadValue ( Message message )
             throws SigarException;
+
+    @Override
+    protected boolean stateIsChangable () {
+        return true;
+    }
 }

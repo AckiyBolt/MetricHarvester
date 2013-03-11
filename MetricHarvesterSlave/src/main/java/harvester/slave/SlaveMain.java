@@ -1,50 +1,41 @@
 package harvester.slave;
 
 import harvester.core.agent.AgentContainer;
-import harvester.core.conversation.Conversation;
-import harvester.core.conversation.ConversationProvider;
-import harvester.core.message.Message;
-import harvester.core.message.MessagePackage;
 import harvester.core.message.SynchronizedMessageBuffer;
-import harvester.slave.agent.SigarAgent;
+import harvester.slave.agent.MessageReciveAgent;
+import harvester.slave.agent.MessageSendAgent;
 import harvester.slave.agent.metric.CPUPercentAgent;
-import java.util.Calendar;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import org.hyperic.sigar.SigarException;
+import harvester.slave.agent.metric.FQDNAgent;
 
 public class SlaveMain {
 
-//    private static MetricProvider metricProvider = new MetricProvider();
-
     public static void main ( String[] args )
-            throws SigarException {
+            throws InterruptedException {
 
         SynchronizedMessageBuffer buffer = new SynchronizedMessageBuffer();
-        AgentContainer metricsContainer = createMetricsContainer(buffer);
-        
-        Conversation conversation = ConversationProvider.createSimpleConversation();
-        
-        Message message = null;
-        
-        while (0 == 0) {
-            message = conversation.reciveMessage( "requestQueue" );
-            message.setReciveRequest( Calendar.getInstance().getTime() );
-            
-            
-            message.setSendResponse( Calendar.getInstance().getTime() );
-            conversation.sendMessage( message, "responseQueue" );
-        }
+        AgentContainer metricsContainer = createMetricsContainer( buffer );
+        metricsContainer.startAgents();
+
+        System.out.println( "All threads were started. Main thread going to be sleeped." );
+        sleeping();
     }
 
-    private static AgentContainer createMetricsContainer (SynchronizedMessageBuffer buffer) {
+    private static AgentContainer createMetricsContainer ( SynchronizedMessageBuffer buffer ) {
         AgentContainer result = new AgentContainer();
-        
-        SigarAgent agent = new CPUPercentAgent( buffer );
-        
+
         result.getAgents().add( new CPUPercentAgent( buffer ) );
-        
+        result.getAgents().add( new FQDNAgent( buffer ) );
+        result.getAgents().add( new MessageReciveAgent( buffer ) );
+        result.getAgents().add( new MessageSendAgent( buffer ) );
+
         return result;
+    }
+
+    private static void sleeping () {
+        try {
+            Thread.sleep( 1000 * 60 * 3 );
+        } catch ( InterruptedException ex ) {
+            System.out.println( ex );
+        }
     }
 }

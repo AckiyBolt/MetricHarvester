@@ -1,9 +1,5 @@
 package harvester.core.agent;
 
-import static harvester.core.agent.AgentState.*;
-import harvester.core.message.Message;
-import harvester.core.message.SynchronizedMessageBuffer;
-
 /**
  *
  * @author Kostiantyn_Belentso
@@ -15,5 +11,5 @@ public abstract class TaskAgent <M, T>
         super( name, monitor );
     }
     
-    public abstract void makeJob (T task);
+    protected abstract void makeJob (T task);
 }

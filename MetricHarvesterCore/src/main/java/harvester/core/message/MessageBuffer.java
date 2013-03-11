@@ -26,7 +26,7 @@ public class MessageBuffer {
         return result;
     }
 
-    public void put ( Message message ) {
+    public void putInput ( Message message ) {
 
         if ( message == null || message.getCommand() == null
              || message.getCommand().isEmpty() )
@@ -38,17 +38,24 @@ public class MessageBuffer {
         messages.put( message.getCommand(), message );
     }
 
-    public void putAll ( Collection<Message> collection ) {
+    public void putOutput ( Message message ) {
 
-        if ( collection != null )
-            for ( Message message : collection )
-                put( message );
+        if ( message == null || message.getCommand() == null
+             || message.getCommand().isEmpty() )
+            return;
+
+        if ( messages == null )
+            messages = new HashMap<String, Message>();
+
+        messages.put( "toBeSend", message );
     }
 
-    public void putPackage ( MessagePackage pack ) {
-        if ( pack != null )
-            putAll( pack.getMessages() );
-    }
+//    public void putAll ( Collection<Message> collection ) {
+//
+//        if ( collection != null )
+//            for ( Message message : collection )
+//                put( message );
+//    }
 
     public Message push ( String command ) {
 

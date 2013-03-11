@@ -123,4 +123,17 @@ public class Message
             return false;
         return true;
     }
+
+    @Override
+    public String toString () {
+        return "Message {" +
+                "\n   sendRequest=    " + sendRequest +
+               ",\n   reciveRequest=  " + reciveRequest +
+               ",\n   sendResponse=   " + sendResponse +
+               ",\n   reciveResponse= " + reciveResponse +
+               ",\n   command=        " + command +
+               ",\n   result=         " + result +
+               ",\n   slaveId=        " + slaveId +
+               "\n}";
+    }
 }

@@ -1,8 +1,6 @@
 package harvester.core.agent;
 
 import static harvester.core.agent.AgentState.*;
-import harvester.core.message.Message;
-import harvester.core.message.SynchronizedMessageBuffer;
 
 /**
  *

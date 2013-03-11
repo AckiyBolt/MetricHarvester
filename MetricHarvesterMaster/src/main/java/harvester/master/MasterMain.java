@@ -30,8 +30,9 @@ public class MasterMain {
 
                 while ( counter > 0 ) {
 
+                    System.out.println( "Sending message..." );
+                    
                     Message message = createMessage();
-                    message.setSendRequest( Calendar.getInstance().getTime() );
                     conversation.sendMessage( message, "requestQueue" );
 
                     counter--;
@@ -45,7 +46,9 @@ public class MasterMain {
 
             private Message createMessage () {
                 Message msg = new Message();
-                msg.setCommand( "CPUPercent" );
+                //msg.setCommand( "CPUPercent" );
+                msg.setCommand( "FQDN" );
+                msg.setSendRequest( Calendar.getInstance().getTime() );
                 return msg;
             }
         };
@@ -60,7 +63,7 @@ public class MasterMain {
                     while ( true ) {
                         Message message = conversation.reciveMessage( QUEUE_NAME );
                         message.setReciveResponse( Calendar.getInstance().getTime() );
-                        System.out.println( " [x][Master] Received '" + message + "'" );
+                        System.out.println( " [x][Master] Received '" + message.toString() + "'" );
                     }
                 } catch ( Exception ex ) {
                     System.out.println( ex );
