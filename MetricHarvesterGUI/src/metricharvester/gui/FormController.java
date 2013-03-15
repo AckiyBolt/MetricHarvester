@@ -1,8 +1,13 @@
 package metricharvester.gui;
 
+import com.google.code.morphia.query.Query;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,22 +25,16 @@ public class FormController
     private ChoiceBox choiceBox;
     @FXML
     private TableView table;
+    private DatabaseManager manager;
 
     @FXML
     private void handleLoadAction ( ActionEvent event ) {
+        Query<Message> find = manager.getDatastore().find( Message.class );
+        List<Message> msgList = find.asList();
         
-        Date date = new Date();
-        Message message = new Message();
-        
-        message.setCommand( "cmd" );
-        message.setSlaveId( "id" );
-        message.setResult( "res" );
-        message.setReciveRequest( date );
-        message.setReciveResponse( date );
-        message.setSendRequest( date );
-        message.setSendResponse( date );
-
-        table.getItems().add( message );
+        for ( Message message : msgList ) {
+            table.getItems().add( message );
+        }
     }
 
     @FXML
@@ -45,11 +44,17 @@ public class FormController
 
     @Override
     public void initialize ( URL url, ResourceBundle rb ) {
-        
-        choiceBox.getItems().clear();
-        choiceBox.getItems().add( "Test 1" );
-        choiceBox.getItems().add( "Test 2" );
-        choiceBox.getItems().add( "Test 3" );
+        try {
+            manager = new DatabaseManager();
+            
+        } catch ( UnknownHostException ex ) {
+            Logger.getLogger( FormController.class.getName() ).log( Level.SEVERE, null, ex );
+        }
+            
+    //        choiceBox.getItems().clear();
+    //        choiceBox.getItems().add( "Test 1" );
+    //        choiceBox.getItems().add( "Test 2" );
+    //        choiceBox.getItems().add( "Test 3" );
 
         
         table.getColumns().clear();

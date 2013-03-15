@@ -1,17 +1,24 @@
 package metricharvester.gui;
 
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
 import java.io.Serializable;
 import java.util.Date;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author T@urus
  */
+
+@Entity
 public class Message
         implements Serializable {
 
     private static final long versionId = 1L;
     
+    @Id
+    private ObjectId id;
     private Date sendRequest;
     private Date reciveRequest;
     private Date sendResponse;
