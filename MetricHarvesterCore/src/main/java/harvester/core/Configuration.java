@@ -1,20 +1,14 @@
 package harvester.core;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  *
  * @author T@urus
  */
 public class Configuration {
     
-    public static String RABBIT_MQ_HOST = "rabbitmq";
-    
-    public static final Map<String, Integer> metrics;
-    static {
-        metrics = new HashMap<String, Integer>();
-        metrics.put("FQDN", 10);
-        metrics.put("CPUPercent", 11);
+    public static final class RABBIT_MQ {
+        public static String HOST =                       "rabbitmq";
+        public static String CLIENT_REGISTRATION_QUEUE =  "client_reg";
+        public static String CLIENT_RESPONSE_QUEUE =      "client_answer";
     }
 }

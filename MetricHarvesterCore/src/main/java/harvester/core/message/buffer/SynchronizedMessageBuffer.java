@@ -1,5 +1,7 @@
-package harvester.core.message;
+package harvester.core.message.buffer;
 
+import harvester.core.message.Message;
+import harvester.model.entity.Metric;
 import java.util.Collection;
 
 /**
@@ -10,8 +12,8 @@ public class SynchronizedMessageBuffer
         extends MessageBuffer {
 
     @Override
-    public synchronized Collection<Message> pushMessages () {
-        return super.pushMessages();
+    public synchronized Collection<Message> pushMetrics () {
+        return super.pushMetrics();
     }
 
     @Override
@@ -27,8 +29,8 @@ public class SynchronizedMessageBuffer
     }
 
     @Override
-    public synchronized Message push ( String command ) {
-        Message message = super.push( command );
-        return message;
+    public synchronized Message push ( String message ) {
+        Message result = super.push( message );
+        return result;
     }
 }

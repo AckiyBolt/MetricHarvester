@@ -15,15 +15,15 @@ public class AgentContainer {
         for ( Agent agent : getAgents() ) {
             agent.start();
         }
-    } 
-    
-    public void startAgents (String ... names) {
+    }
+
+    public void startAgents ( String... names ) {
         for ( Agent agent : getAgents() )
             for ( String name : names )
-                if (agent.getName().equals( name ) )
+                if ( agent.getName().equals( name ) )
                     agent.start();
-    } 
-    
+    }
+
     public Collection<Agent> getAgents () {
         if ( agents == null )
             agents = new LinkedList<Agent>();

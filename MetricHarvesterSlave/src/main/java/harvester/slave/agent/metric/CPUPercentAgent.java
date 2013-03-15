@@ -1,9 +1,8 @@
 package harvester.slave.agent.metric;
 
 import harvester.core.message.Message;
-import harvester.core.message.SynchronizedMessageBuffer;
+import harvester.core.message.buffer.SynchronizedMessageBuffer;
 import harvester.slave.agent.SigarAgent;
-import java.math.BigDecimal;
 import org.hyperic.sigar.CpuPerc;
 import org.hyperic.sigar.SigarException;
 
@@ -43,6 +42,6 @@ public class CPUPercentAgent
         }
 
         String result = String.valueOf( buffer / ( coreCount * TEST_COUNT ) );
-        message.setResult( result );
+        message.setResponse( result );
     }
 }

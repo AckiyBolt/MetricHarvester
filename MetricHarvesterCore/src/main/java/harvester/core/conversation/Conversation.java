@@ -1,6 +1,7 @@
 package harvester.core.conversation;
 
 import harvester.core.message.Message;
+import harvester.model.entity.Metric;
 
 /**
  *

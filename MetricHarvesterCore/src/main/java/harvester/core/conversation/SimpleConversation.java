@@ -6,6 +6,7 @@ import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.ShutdownSignalException;
 import harvester.core.JSONConverter;
 import harvester.core.message.Message;
+import harvester.model.entity.Metric;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,7 @@ public class SimpleConversation
     }
 
     public Message reciveMessage ( String resourceName ) {
+
         Message result = null;
         Channel channel = null;
 

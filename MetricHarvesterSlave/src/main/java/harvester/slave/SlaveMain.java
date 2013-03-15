@@ -1,9 +1,10 @@
 package harvester.slave;
 
+import harvester.core.Configuration;
 import harvester.core.agent.AgentContainer;
-import harvester.core.message.SynchronizedMessageBuffer;
-import harvester.slave.agent.MessageReciveAgent;
-import harvester.slave.agent.MessageSendAgent;
+import harvester.core.agent.conversation.MessageReciveAgent;
+import harvester.core.agent.conversation.MessageSendAgent;
+import harvester.core.message.buffer.SynchronizedMessageBuffer;
 import harvester.slave.agent.metric.CPUPercentAgent;
 import harvester.slave.agent.metric.FQDNAgent;
 
@@ -25,8 +26,8 @@ public class SlaveMain {
 
         result.getAgents().add( new CPUPercentAgent( buffer ) );
         result.getAgents().add( new FQDNAgent( buffer ) );
-        result.getAgents().add( new MessageReciveAgent( buffer ) );
-        result.getAgents().add( new MessageSendAgent( buffer ) );
+        result.getAgents().add( new MessageReciveAgent( buffer, Configuration.RABBIT_MQ.CLIENT_REGISTRATION_QUEUE ) );
+        result.getAgents().add( new MessageSendAgent( buffer, Configuration.RABBIT_MQ.CLIENT_RESPONSE_QUEUE ) );
 
         return result;
     }

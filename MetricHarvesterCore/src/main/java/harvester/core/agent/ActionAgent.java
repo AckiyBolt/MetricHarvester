@@ -1,8 +1,8 @@
 package harvester.core.agent;
 
 import static harvester.core.agent.AgentState.*;
-import harvester.core.message.Message;
-import harvester.core.message.SynchronizedMessageBuffer;
+import harvester.model.entity.Metric;
+import harvester.core.message.buffer.SynchronizedMessageBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

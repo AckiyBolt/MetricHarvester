@@ -1,7 +1,7 @@
 package harvester.core.agent;
 
 import harvester.core.message.Message;
-import harvester.core.message.SynchronizedMessageBuffer;
+import harvester.core.message.buffer.SynchronizedMessageBuffer;
 
 /**
  *
@@ -23,7 +23,7 @@ public abstract class MessageTaskAgent
     @Override
     protected void makeJob () {
         Message message = buffer.push( this.getName() );
-        
+
         if ( message == null )
             return;
 

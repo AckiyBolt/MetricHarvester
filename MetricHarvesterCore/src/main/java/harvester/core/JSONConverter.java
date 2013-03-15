@@ -1,6 +1,7 @@
 package harvester.core;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  *
@@ -8,7 +9,13 @@ import com.google.gson.Gson;
  */
 public class JSONConverter <T> {
     
-    private Gson gson = new Gson();
+    private Gson gson;
+
+    public JSONConverter () {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        gson = builder.create();
+    }
     
     public String toString (T obj) {
         return gson.toJson( obj );

@@ -1,5 +1,7 @@
-package harvester.core.message;
+package harvester.core.message.buffer;
 
+import harvester.core.message.Message;
+import harvester.model.entity.Metric;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,7 +15,7 @@ public class MessageBuffer {
 
     private Map<String, Message> messages;
 
-    protected Collection<Message> getMessages () {
+    protected Collection<Message> getMetrics () {
 
         Collection<Message> result = null;
 
@@ -28,20 +30,20 @@ public class MessageBuffer {
 
     public void putInput ( Message message ) {
 
-        if ( message == null || message.getCommand() == null
-             || message.getCommand().isEmpty() )
+        if ( message == null || message.getRequest() == null
+             || message.getRequest().isEmpty() )
             return;
 
         if ( messages == null )
             messages = new HashMap<String, Message>();
 
-        messages.put( message.getCommand(), message );
+        messages.put( message.getRequest(), message );
     }
 
     public void putOutput ( Message message ) {
 
-        if ( message == null || message.getCommand() == null
-             || message.getCommand().isEmpty() )
+        if ( message == null || message.getRequest() == null
+             || message.getRequest().isEmpty() )
             return;
 
         if ( messages == null )
@@ -50,24 +52,17 @@ public class MessageBuffer {
         messages.put( "toBeSend", message );
     }
 
-//    public void putAll ( Collection<Message> collection ) {
-//
-//        if ( collection != null )
-//            for ( Message message : collection )
-//                put( message );
-//    }
-
-    public Message push ( String command ) {
+    public Message push ( String message ) {
 
         Message result = null;
 
         if ( messages != null && !messages.isEmpty() )
-            result = messages.remove( command );
+            result = messages.remove( message );
 
         return result;
     }
 
-    public Collection<Message> pushMessages () {
+    public Collection<Message> pushMetrics () {
 
         Collection<Message> result = null;
 

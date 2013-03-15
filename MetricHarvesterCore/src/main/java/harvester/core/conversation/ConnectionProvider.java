@@ -16,7 +16,7 @@ public class ConnectionProvider {
 
         ConnectionProvider () {
             factory = new ConnectionFactory();
-            factory.setHost( Configuration.RABBIT_MQ_HOST );
+            factory.setHost( Configuration.RABBIT_MQ.HOST );
         }
 
         public Channel createChannel ( String queueName )
