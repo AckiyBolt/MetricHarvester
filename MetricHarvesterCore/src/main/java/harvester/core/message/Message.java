@@ -10,6 +10,7 @@ public class Message {
     
     private String request;
     private String response;
+    private String senderName;
     private Date sendRequest;
     private Date reciveRequest;
     private Date sendResponse;
@@ -32,6 +33,14 @@ public class Message {
 
     public void setResponse ( String response ) {
         this.response = response;
+    }
+
+    public String getSenderName () {
+        return senderName;
+    }
+
+    public void setSenderName ( String senderName ) {
+        this.senderName = senderName;
     }
 
     public Date getSendRequest () {
