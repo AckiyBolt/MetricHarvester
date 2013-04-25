@@ -3,7 +3,7 @@ package harvester.core.conversation;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import harvester.core.Configuration;
+import harvester.configuration.Configuration;
 import java.io.IOException;
 
 /**

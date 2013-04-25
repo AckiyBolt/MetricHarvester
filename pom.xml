@@ -13,5 +13,6 @@
         <module>MetricHarvesterCore</module>
         <module>MetricHarvesterMaster</module>
         <module>MetricHarvesterSlave</module>
-    </modules>
+        <module>MetricHarvesterConfiguration</module>
+  </modules>
 </project>

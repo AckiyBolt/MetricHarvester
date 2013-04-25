@@ -1,6 +1,6 @@
 package harvester.slave;
 
-import harvester.core.Configuration;
+import harvester.configuration.Configuration;
 import harvester.core.agent.AgentContainer;
 import harvester.core.agent.conversation.MessageReciveAgent;
 import harvester.core.agent.conversation.MessageSendAgent;
@@ -25,7 +25,7 @@ public class SlaveMain {
         AgentContainer metricsContainer = createMetricsContainer( buffer );
         metricsContainer.startAgents();
 
-        System.out.println( "All threads were started. Main thread going to be sleeped." );
+        System.out.println( "All agents were started. Main thread going to be sleeped." );
         sleeping();
     }
 

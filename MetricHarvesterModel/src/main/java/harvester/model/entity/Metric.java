@@ -28,6 +28,10 @@ public class Metric
     public Metric () {
     }
 
+    public Metric (ObjectId id) {
+        this.id = id;
+    }
+
     public ObjectId getId () {
         return id;
     }

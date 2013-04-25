@@ -1,15 +1,19 @@
 package harvester.master;
 
-import harvester.core.Configuration;
+import com.google.code.morphia.Datastore;
+import com.google.code.morphia.query.Query;
+import harvester.configuration.Configuration;
 import harvester.core.conversation.Conversation;
 import harvester.core.conversation.ConversationProvider;
 import harvester.core.message.Message;
 import java.net.UnknownHostException;
 import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import harvester.model.db.DatastoreManager;
+import harvester.model.entity.Client;
+import harvester.model.entity.Metric;
+import java.util.List;
 
 public class MasterMain {
 
@@ -32,6 +36,7 @@ public class MasterMain {
         sendingThread.start();
         registrationThread.start();
 
+        System.out.println( "All agents were started. Main thread going to be sleeped." );
         sleeping();
     }
 
@@ -47,6 +52,7 @@ public class MasterMain {
         return new Runnable() {
             public void run () {
 
+                System.out.println( "Sending agent ready for work" );
                 while ( true ) {
                     while ( clientsNames == null || clientsNames.isEmpty() ) {
                         try {
@@ -86,24 +92,41 @@ public class MasterMain {
     private static Runnable createListeningThread ()
             throws UnknownHostException {
 
-        //final DatabaseManager manager = new DatabaseManager();
-
         return new Runnable() {
             public void run () {
 
+                System.out.println( "Listening agent ready for work" );
+                DatastoreManager manager = new DatastoreManager();
+                Datastore datastore = manager.getDatastore();
                 clientsNames = new CopyOnWriteArraySet<String>();
 
-                try {
-                    while ( true ) {
-                        Message message = conversation.reciveMessage( Configuration.RABBIT_MQ.CLIENT_RESPONSE_QUEUE );
-                        message.setReciveResponse( Calendar.getInstance().getTime() );
+                while ( true ) {
+                    Message message = conversation.reciveMessage( Configuration.RABBIT_MQ.CLIENT_RESPONSE_QUEUE );
+                    message.setReciveResponse( Calendar.getInstance().getTime() );
 
-                        System.out.println( "Message recived: " + message );
-                        //manager.getDatastore().save( message );
-                    }
-                } catch ( Exception ex ) {
-                    System.out.println( ex );
+                    System.out.println( "Message recived: " + message );
+
+                    datastore.save( message );
+                    Client client = datastore.find( Client.class, "name", message.getSenderName() ).get();
+                    Metric metric = convertMessageToMetric( message );
+                    client.getMetrics().add( metric );
+                    datastore.merge( client );
+
+                    System.out.println( "Message has been saved" );
                 }
+
+            }
+
+            private Metric convertMessageToMetric ( Message message ) {
+                Metric metric = new Metric();
+                metric.setClientName( message.getSenderName() );
+                metric.setMetric( message.getRequest() );
+                metric.setResult( message.getResponse() );
+                metric.setSendRequest( message.getSendRequest() );
+                metric.setSendResponse( message.getSendResponse() );
+                metric.setReciveRequest( message.getReciveRequest() );
+                metric.setReciveResponse( message.getReciveResponse() );
+                return metric;
             }
         };
     }
@@ -113,17 +136,41 @@ public class MasterMain {
 
         return new Runnable() {
             public void run () {
-                try {
-                    while ( true ) {
-                        Message message = conversation.reciveMessage( Configuration.RABBIT_MQ.CLIENT_REGISTRATION_QUEUE );
+                
+                System.out.println( "Registration listening agent ready for work" );
+                
+                while ( true ) {
+                    Message message = conversation.reciveMessage( Configuration.RABBIT_MQ.CLIENT_REGISTRATION_QUEUE );
+                    String clientName = message.getRequest();
 
-                        clientsNames.add( message.getRequest() );
+                    Client client = loadClientOrCreateIfNotExist( clientName );
 
-                        System.out.println( "Slave registered: " + message.getRequest() );
-                    }
-                } catch ( Exception ex ) {
-                    System.out.println( ex );
+                    clientsNames.add( clientName );
+
+                    System.out.println( "Slave registered: " + clientName );
                 }
+            }
+
+            private Client loadClientOrCreateIfNotExist ( String clientName ) {
+
+                DatastoreManager manager = new DatastoreManager();
+                Datastore datastore = manager.getDatastore();
+
+                Query<Client> resultQuery = datastore.find( Client.class, "name", clientName );
+                List<Client> resultList = resultQuery.asList();
+
+                Client client = null;
+
+                if ( !resultList.isEmpty() )
+                    client = resultList.get( 0 );
+                else {
+                    client = new Client();
+                    client.setName( clientName );
+
+                    datastore.save( client );
+                }
+
+                return client;
             }
         };
     }

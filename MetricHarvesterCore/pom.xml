@@ -31,7 +31,11 @@
             <artifactId>Model</artifactId>
             <version>0.1</version>
         </dependency>
-        
+        <dependency>
+            <groupId>harvester</groupId>
+            <artifactId>Configuration</artifactId>
+            <version>0.1</version>
+        </dependency>
         
         <dependency>
             <groupId>junit</groupId>

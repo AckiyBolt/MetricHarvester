@@ -22,4 +22,36 @@ public class Task
 
     public Task () {
     }
+
+    public ObjectId getId () {
+        return id;
+    }
+
+    public void setId ( ObjectId id ) {
+        this.id = id;
+    }
+
+    public Long getPeriod () {
+        return period;
+    }
+
+    public void setPeriod ( Long period ) {
+        this.period = period;
+    }
+
+    public String getMetricName () {
+        return metricName;
+    }
+
+    public void setMetricName ( String metricName ) {
+        this.metricName = metricName;
+    }
+
+    public String getClientName () {
+        return clientName;
+    }
+
+    public void setClientName ( String clientName ) {
+        this.clientName = clientName;
+    }
 }
