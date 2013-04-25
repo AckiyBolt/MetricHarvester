@@ -4,7 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{209412CA-5FF0-4C39-B022-F7D25CDC2F62}" Name="Diploma" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="Diploma/Diploma.prj"/>
+		<Model Expanded="Yes" ID="{209412CA-5FF0-4C39-B022-F7D25CDC2F62}" Name="Diploma" Selected="Yes" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="Diploma/Diploma.prj"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
