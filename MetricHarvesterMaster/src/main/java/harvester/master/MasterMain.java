@@ -106,9 +106,9 @@ public class MasterMain {
 
                     System.out.println( "Message recived: " + message );
 
-                    datastore.save( message );
-                    Client client = datastore.find( Client.class, "name", message.getSenderName() ).get();
                     Metric metric = convertMessageToMetric( message );
+                    //datastore.save( message );
+                    Client client = datastore.find( Client.class, "name", message.getSenderName() ).get();
                     client.getMetrics().add( metric );
                     datastore.merge( client );
 

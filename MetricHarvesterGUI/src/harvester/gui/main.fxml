@@ -32,7 +32,7 @@
           <menus>
             <Menu mnemonicParsing="false" text="VPS" fx:id="vpsMenu">
               <items>
-                <MenuItem mnemonicParsing="false" text="Do something" />
+                <MenuItem mnemonicParsing="false" onAction="#handleButtonAction" text="Do something" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Statictic">
@@ -44,11 +44,6 @@
                 <CheckMenuItem mnemonicParsing="false" text="Last week" />
                 <SeparatorMenuItem mnemonicParsing="false" />
                 <MenuItem mnemonicParsing="false" text="Clean" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Unspecified Menu">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleButtonAction" text="Action 1" />
               </items>
             </Menu>
           </menus>
