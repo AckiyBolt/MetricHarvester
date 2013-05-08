@@ -18,7 +18,6 @@ public class Task
     private ObjectId id;
     private Long period;
     private String metricName;
-    private String clientName;
 
     public Task () {
     }
@@ -47,11 +46,8 @@ public class Task
         this.metricName = metricName;
     }
 
-    public String getClientName () {
-        return clientName;
-    }
-
-    public void setClientName ( String clientName ) {
-        this.clientName = clientName;
+    @Override
+    public String toString () {
+        return metricName + " [" + period + "s]";
     }
 }

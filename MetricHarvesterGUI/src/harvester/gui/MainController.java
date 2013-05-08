@@ -1,7 +1,6 @@
 package harvester.gui;
 
 import com.google.code.morphia.Datastore;
-import com.google.code.morphia.query.Query;
 import harvester.model.db.DatastoreManager;
 import harvester.model.entity.Client;
 import java.net.URL;
@@ -20,13 +19,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import harvester.model.entity.Metric;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
  * @author T@urus
  */
-public class mainController
+public class MainController
         implements Initializable {
 
     private Datastore datastore;
@@ -37,15 +35,17 @@ public class mainController
     @FXML
     private Menu vpsMenu;
 
-    public mainController () {
+    public MainController () {
     }
 
     @FXML
     private void handleButtonAction ( ActionEvent event ) {
-        //initMockGrid();
-        loadGridData();
-        //initMockChart();
-        initMenu();
+        
+        SatgeImpl.TASK_INSTANCE.showScene();
+//        //initMockGrid();
+//        loadGridData();
+//        //initMockChart();
+//        initMenu();
     }
 
     private void loadGridData () {

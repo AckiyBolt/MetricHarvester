@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="harvester.gui.TaskController">
+  <children>
+    <!---->
+    <Label layoutX="14.0" layoutY="14.0" text="Selected tasks:" />
+    <ListView fx:id="selectedTasksList" layoutX="14.0" layoutY="30.0" onMouseClicked="#selectedTaskListClick" prefHeight="266.0" prefWidth="253.0" />
+    <Label layoutX="333.0" layoutY="14.0" text="Available tasks:" />
+    <ListView fx:id="availableTasksList" layoutX="333.0" layoutY="30.0" onMouseClicked="#availableTaskListClick" prefHeight="310.0" prefWidth="253.0" />
+    <!---->
+    <Button layoutX="282.0" layoutY="97.0" mnemonicParsing="false" onAction="#selectAllTasks" text="&lt;&lt;" textAlignment="CENTER" />
+    <Button layoutX="282.0" layoutY="210.0" mnemonicParsing="false" onAction="#deselectAllTasks" text="&gt;&gt;" textAlignment="CENTER" />
+    <Button layoutX="286.0" layoutY="132.0" mnemonicParsing="false" onAction="#selectTask" text="&lt;" textAlignment="CENTER" />
+    <Button layoutX="286.0" layoutY="174.0" mnemonicParsing="false" onAction="#deselectTask" text="&gt;" textAlignment="CENTER" />
+    <!---->
+    <Label layoutX="333.0" layoutY="341.0" text="Add new task:" />
+    <TextField fx:id="addNewTaskTB" layoutX="333.0" layoutY="357.0" prefWidth="216.0" />
+    <Button fx:id="addTaskButton" layoutX="557.0" layoutY="357.0" mnemonicParsing="false" onAction="#addTask" text="+" />
+    <!---->
+    <Label layoutX="14.0" layoutY="302.0" text="Harvesting period for task" />
+    <TextField fx:id="selectedTaskName" editable="false" layoutX="14.0" layoutY="318.0" prefWidth="253.0" />
+    <Label layoutX="14.0" layoutY="341.0" text="is (in seconds):" />
+    <TextField fx:id="selectedTaskPeriod" layoutX="14.0" layoutY="357.0" prefWidth="138.0" />
+    <Button fx:id="setSelectedTaskPeriod" layoutX="160.0" layoutY="357.0" mnemonicParsing="false" onAction="#setSelectedTaskPeriod" text="Set" />
+    <Button layoutX="222.0" layoutY="357.0" mnemonicParsing="false" onAction="#back" text="Back" />
+  </children>
+</AnchorPane>

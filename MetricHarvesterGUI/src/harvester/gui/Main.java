@@ -19,13 +19,8 @@ public class Main
     public void start ( Stage stage )
             throws Exception {
         
-        Parent root = FXMLLoader.load( getClass().getResource( "main.fxml" ) );
-        
-        Scene scene = new Scene( root );
-        
-        stage.setTitle( "Metric harvester" );
-        stage.setScene( scene );
-        stage.show();
+        SatgeImpl.setStage( stage );
+        SatgeImpl.MAIN_INSTANCE.showScene();
     }
 
     public static void main ( String[] args ) {

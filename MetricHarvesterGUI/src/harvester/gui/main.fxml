@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="794.0" xmlns:fx="http://javafx.com/fxml" fx:controller="harvester.gui.mainController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="794.0" xmlns:fx="http://javafx.com/fxml" fx:controller="harvester.gui.MainController">
   <children>
     <BorderPane prefHeight="623.0" prefWidth="794.0">
       <center>
