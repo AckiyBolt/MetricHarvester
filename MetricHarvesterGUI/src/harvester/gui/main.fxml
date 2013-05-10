@@ -13,7 +13,7 @@
       <center>
         <BorderPane prefHeight="200.0" prefWidth="200.0">
           <bottom>
-            <AreaChart id="AreaChartNxN" fx:id="metricChart">
+            <AreaChart fx:id="metricChart">
               <xAxis>
                 <NumberAxis side="BOTTOM" />
               </xAxis>
@@ -30,11 +30,8 @@
       <top>
         <MenuBar>
           <menus>
-            <Menu mnemonicParsing="false" text="VPS" fx:id="vpsMenu">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleButtonAction" text="Do something" />
-              </items>
-            </Menu>
+            <Menu mnemonicParsing="false" text="VPS" fx:id="vpsMenu" />
+            <Menu mnemonicParsing="false" text="Task" fx:id="taskMenu" />
             <Menu mnemonicParsing="false" text="Statictic">
               <items>
                 <CheckMenuItem mnemonicParsing="false" text="Real time" />

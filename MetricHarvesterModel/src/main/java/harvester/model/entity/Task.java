@@ -47,7 +47,26 @@ public class Task
     }
 
     @Override
+    public int hashCode () {
+        int hash = 3;
+        hash = 97 * hash + ( this.metricName != null ? this.metricName.hashCode() : 0 );
+        return hash;
+    }
+
+    @Override
+    public boolean equals ( Object obj ) {
+        if ( obj == null )
+            return false;
+        if ( getClass() != obj.getClass() )
+            return false;
+        final Task other = ( Task ) obj;
+        if ( ( this.metricName == null ) ? ( other.metricName != null ) : !this.metricName.equals( other.metricName ) )
+            return false;
+        return true;
+    }
+
+    @Override
     public String toString () {
-        return metricName + " [" + period + "s]";
+        return metricName;
     }
 }

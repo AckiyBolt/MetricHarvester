@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import harvester.model.entity.Metric;
+import harvester.model.entity.Task;
 import java.util.List;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
@@ -33,8 +34,11 @@ public class MainController
     @FXML
     private AreaChart<Number, Number> metricChart;
     @FXML
+    private Menu taskMenu;
+    private MenuItem tasksManageMenuItem;
+    @FXML
     private Menu vpsMenu;
-    private MenuItem updateMenuItem;
+    private MenuItem updateVpsesMenuItem;
 
     @FXML
     private void handleButtonAction ( ActionEvent event ) {
@@ -62,10 +66,10 @@ public class MainController
         metricChart.getData().add( series );
     }
 
-    private void initMenu () {
+    private void initVpsMenu () {
         
         vpsMenu.getItems().clear();
-        vpsMenu.getItems().addAll( updateMenuItem, new SeparatorMenuItem() );
+        vpsMenu.getItems().addAll( updateVpsesMenuItem, new SeparatorMenuItem() );
 
         List<Client> clients = datastore.find( Client.class ).asList();
 
@@ -77,19 +81,52 @@ public class MainController
                 public void handle ( ActionEvent t ) {
                     fillGridData( client );
                     fillChart( client );
+                    ClientHolder.INSTANCE.setClient( client );
+                    initTaskMenu();
                 }
             } );
 
             vpsMenu.getItems().add( item );
         }
     }
+    
+    private void initTaskMenu () {
+        taskMenu.getItems().clear();
+        taskMenu.getItems().addAll( tasksManageMenuItem, new SeparatorMenuItem() );
+        
+        Client client = ClientHolder.INSTANCE.getClient();
+        
+        for ( final Task task : client.getTasks() ) {
 
-    private void createUpdateMenuItem () {
-        updateMenuItem = new MenuItem( "Update" );
-        updateMenuItem.addEventHandler( ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            MenuItem item = new MenuItem( task.getMetricName() );
+//            item.addEventHandler( ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+//                @Override
+//                public void handle ( ActionEvent t ) {
+//            
+//                }
+//            } );
+
+            taskMenu.getItems().add( item );
+        }
+    }
+
+    private void createUpdateVpsesMenuItem () {
+        updateVpsesMenuItem = new MenuItem( "Update" );
+        updateVpsesMenuItem.addEventHandler( ActionEvent.ACTION, new EventHandler<ActionEvent>() {
             @Override
             public void handle ( ActionEvent t ) {
-                initMenu();
+                initVpsMenu();
+            }
+        } );
+    }
+    
+    private void createTaskManageMenuItem () {
+        tasksManageMenuItem = new MenuItem( "Manage" );
+        tasksManageMenuItem.addEventHandler( ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle ( ActionEvent t ) {
+                SatgeImpl.TASK_INSTANCE.getTaskController().prepareData();
+                SatgeImpl.TASK_INSTANCE.showScene();
             }
         } );
     }
@@ -101,8 +138,11 @@ public class MainController
         
         initGridColumns();
         
-        createUpdateMenuItem();
-        vpsMenu.getItems().add( updateMenuItem );
+        createUpdateVpsesMenuItem();
+        vpsMenu.getItems().add( updateVpsesMenuItem );
+        
+        createTaskManageMenuItem();
+        taskMenu.getItems().add( tasksManageMenuItem );
         
         metricChart.getXAxis().setLabel( "Steps" );
         metricChart.getYAxis().setLabel( "Load" );
