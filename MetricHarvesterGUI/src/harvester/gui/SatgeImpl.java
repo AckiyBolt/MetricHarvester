@@ -24,6 +24,7 @@ public enum SatgeImpl {
         try {
             Parent root = FXMLLoader.load( getClass().getResource( fxml ) );
             scene = new Scene( root );
+            this.title = title;
 
         } catch ( IOException ex ) {
             System.out.println( "Can't load fxml: " + fxml );
