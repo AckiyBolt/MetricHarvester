@@ -8,3 +8,5 @@
 /MetricHarvesterModel/target/
 /MetricHarvesterConfiguration/target/
 /MetricHarvesterGUI/target/
+/.idea/
+*.iml
