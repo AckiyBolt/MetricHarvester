@@ -5,6 +5,9 @@
 <Workspace>
 	<Local Expanded="Yes">
 		<Model Expanded="Yes" ID="{209412CA-5FF0-4C39-B022-F7D25CDC2F62}" Name="Diploma" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="Diploma/Diploma.prj"/>
+		<Model ID="{11602F23-0416-4579-914E-3AE1C052C2AE}" Name="master" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="Diploma/master.oom"/>
+		<Model Expanded="Yes" ID="{EBA03E36-1762-4AC5-B928-3D97CB35B4C9}" Name="all" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="Diploma/all.oom"/>
+		<Model Expanded="Yes" ID="{68769667-6BA5-438A-B245-537AD01E3844}" Name="datafolw" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="Diploma/datafolw.oom"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
