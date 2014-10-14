@@ -8,7 +8,7 @@ Master  - server agent that generates its own will;
 Slave   - VPS agent that executes master's will;  
 Core    - slavery laws =)
 
-This project uses ActiveMQ and Sigar now. Some other thigs (like DB) will be in future.
+This project uses RabbitMQ and Sigar now. Some other thigs (like DB) will be in future.
 
 
 More deeper description of this funniest "Multi-agent system" i'm going to provide later.
